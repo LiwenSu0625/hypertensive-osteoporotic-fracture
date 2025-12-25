@@ -15,6 +15,7 @@
 
 ## Replace "E:\\Your\\Data\\Path" with your data storage path.
 setwd("E:\\Your\\Data\\Path")
+
 library(readxl)
 library(irr)
 library(vcd)
@@ -97,13 +98,13 @@ severeliver <- as.numeric(unlist(raw_data[,"3Moderate to severe liver disease"])
 Malignant <- as.numeric(unlist(raw_data[,"6Malignant tumors"]))
 AIDS <- as.numeric(unlist(raw_data[,"6AIDS"]))
 CCI <- as.numeric(unlist(raw_data[,"CCI"]))
-CCI[CCI >= 3] <- 3      # Truncate CCI score at ¡Ý3 and convert to categorical variable
+CCI[CCI >= 3] <- 3      # Truncate CCI score at â‰¥3 and convert to categorical variable
 CCI <- as.factor(CCI)
 CCI  <- relevel(CCI, ref = "0")  
 
 
 ## Medication exposure variables were coded as binary indicators, 
-## defined as any recorded use (¡Ý1) during the observation period.
+## defined as any recorded use (â‰¥1) during the observation period.
 CA  <- as.numeric(unlist(raw_data[,"CA"])  >= 1)
 VD1 <- as.numeric(unlist(raw_data[,"VD1"]) >= 1)
 VD2 <- as.numeric(unlist(raw_data[,"VD2"]) >= 1)
@@ -115,7 +116,7 @@ ALN <- as.numeric(unlist(raw_data[,"ALN"]) >= 1)
 
 ## Laboratory measurements
 ## extraction and numeric conversion of baseline biochemical 
-## and bone metabolism¨Crelated laboratory variables
+## and bone metabolismâ€“related laboratory variables
 potassium <- as.numeric(unlist(raw_data[,"potassium"]))
 magnesium <- as.numeric(unlist(raw_data[,"magnesium"]))
 sodium    <- as.numeric(unlist(raw_data[,"sodium"]))
@@ -145,12 +146,12 @@ UA        <- as.numeric(unlist(raw_data[,"UA"]))
 ASA       <- as.numeric(unlist(raw_data[,"ASA"]))
 
 
-## Outcome variables£ºAll-cause mortality and refracture
+## Outcome variablesï¼šAll-cause mortality and refracture
 survivaltime   <- round(as.numeric(unlist(raw_data[,"Survivaltime"]))/30,1)
 death <- as.numeric(unlist(raw_data[,"Death_all"]))
 
 refracturetime   <- round(as.numeric(unlist(raw_data[,"Refracturetime"]))/30,1)
-refracture <- as.numeric(raw_data$Refracture >= 1) #multiple refracture events are collapsed into a binary indicator (0 = no refracture, 1 = ¡Ý1 refracture)
+refracture <- as.numeric(raw_data$Refracture >= 1) #multiple refracture events are collapsed into a binary indicator (0 = no refracture, 1 = â‰¥1 refracture)
 
 ## Hypertension assessment
 admission_date <- as.POSIXct(raw_data$Admissiondate, format = "%Y-%m-%d")
@@ -174,8 +175,8 @@ indicator <- ifelse(hyper_data$ID %in% drug_id, 1, 0) # Indicator of recorded an
 indicator 
 
 
-## Hypertension was defined as systolic blood pressure ¡Ý140 mmHg, 
-## diastolic blood pressure ¡Ý90 mmHg, or recorded use of antihypertensive medication.
+## Hypertension was defined as systolic blood pressure â‰¥140 mmHg, 
+## diastolic blood pressure â‰¥90 mmHg, or recorded use of antihypertensive medication.
 hypertension <- ifelse((SBP > 140 & DBP > 90) | indicator == 1, 1, 0)
 ## Proportion of patients with and without hypertension
 cat("Proportion of patients with hypertension:",round(sum(hypertension,na.rm=T)/4751,3),"\n")  ;cat("Proportion of patients without hypertension:",1-round(sum(hypertension,na.rm=T)/4751,3))
@@ -666,7 +667,7 @@ summary_fit
 
 
 
-## Figure 2A. Kaplan¨CMeier survival analyses stratified by nhypertension status
+## Figure 2A. Kaplanâ€“Meier survival analyses stratified by nhypertension status
 coxdata<-data.frame(survivaltime=survivaltime,death=death,hypertension=hypertension,gender=gender,age=age,BMI=BMI,smoke=smoke,drink=drink,
                     potassium=potassium,phosphorus=phosphorus,calcium=calcium,hemoglobin=hemoglobin,
                     CA=CA,VD1=VD1,VD2=VD2,ZOL=ZOL,CAL=CAL,ALN=ALN,CCI=CCI,
@@ -688,7 +689,7 @@ Figure2.A <- ggsurvplot(km.plot_death,
            title="A. Kaplan-Meier Curve for Survival", 
            legend.labs = c("Non-hypertensive", "Hypertensive"))
 
-## Figure 2B. Kaplan¨CMeier refracture analyses stratified by nhypertension status
+## Figure 2B. Kaplanâ€“Meier refracture analyses stratified by nhypertension status
 refradata<-data.frame(refracturetime=refracturetime,refracture=refracture,hypertension=hypertension,gender=gender,age=age,BMI=BMI,smoke=smoke,drink=drink,
                       potassium=potassium,phosphorus=phosphorus,calcium=calcium,hemoglobin=hemoglobin,
                       CA=CA,VD1=VD1,VD2=VD2,ZOL=ZOL,CAL=CAL,ALN=ALN,CCI=CCI,
@@ -710,7 +711,7 @@ Figure2.B <-ggsurvplot(km.plot_refra,
            title="B. Kaplan-Meier Curve for Refracture", 
            legend.labs = c("Non-hypertensive", "Hypertensive"))
 
-## Figure 2. Kaplan¨CMeier survival and refracture analyses
+## Figure 2. Kaplanâ€“Meier survival and refracture analyses
 ## reproduced exactly as shown in the manuscript.
 Figure2 <- ggarrange(
   ggarrange(Figure2.A$plot, Figure2.A$table,
@@ -951,7 +952,7 @@ Hdeaths_within_5_year <- sum(Hfive_year_data$death == 1)
 Htotal_within_1_year <- nrow(matched_data_1)
 Htotal_within_3_year <- nrow(matched_data_1)
 Htotal_within_5_year <- nrow(matched_data_1)
-##  Calculate mortality rateÂÊ
+##  Calculate mortality rateçŽ‡
 Hone_year_mortality_rate <- Hdeaths_within_1_year / Htotal_within_1_year
 Hthree_year_mortality_rate <- Hdeaths_within_3_year / Htotal_within_3_year
 Hfive_year_mortality_rate <- Hdeaths_within_5_year / Htotal_within_5_year
@@ -1290,7 +1291,7 @@ FigureS3 <- ggplot(p_values_long, aes(Var1, Var2, fill = value)) +
                        high = "#1F77B4",   
                        midpoint = 0.5,    
                        name = "P value") +  
-  geom_text(aes(label = ifelse(value <= 0.001, "¡Ü0.001", sprintf("%.3f", value))), 
+  geom_text(aes(label = ifelse(value <= 0.001, "â‰¤0.001", sprintf("%.3f", value))), 
             color = "black",  
             size = 4) + 
   theme_minimal() +
@@ -1309,7 +1310,7 @@ FigureS3
 ## In this sensitivity analysis, hypertension was redefined solely
 ## based on documented use of antihypertensive medications.
 ## This code fully reproduces the survival results reported in Supplementary Table 1.
-hypertension <- ifelse( indicator == 1, 1, 0)  # ½ö³ÔÒ©
+hypertension <- ifelse( indicator == 1, 1, 0)  # ä»…åƒè¯
 ## Proportion of hypertension
 cat("Proportion of hypertensive patients:",round(sum(hypertension,na.rm=T)/4751,3),"\n")  ;cat("Proportion of non hypertensive patients:",1-round(sum(hypertension,na.rm=T)/4751,3))
 
@@ -1650,18 +1651,18 @@ plot_df$"P value" <- as.character(plot_df$"P value")
 plot_df$Hypertensive <- as.character(plot_df$Hypertensive)
 plot_df$"Non-Hypertensive" <- as.character(plot_df$"Non-Hypertensive")
 plot_df[,c(3)][is.na(plot_df[,c(3)])] <- " "
-plot_df[,c(3)][which(plot_df[,c(3)]=="0"),] <- "¡Ü0.001"
+plot_df[,c(3)][which(plot_df[,c(3)]=="0"),] <- "â‰¤0.001"
 
 plot_df[,c(3,6,7,8)][is.na(plot_df[,c(3,6,7,8)])] <- " "
 plot_df$` ` <- paste(rep(" ", nrow(plot_df)), collapse = " ")
 plot_df$Subgroup[3] <- "      Female"
 plot_df$Subgroup[4] <- "      Male"
-plot_df$Subgroup[6] <- "      ¡Ü69"
+plot_df$Subgroup[6] <- "      â‰¤69"
 plot_df$Subgroup[7] <- "      >69"
-plot_df$Subgroup[9] <- "      ¡Ü23"
+plot_df$Subgroup[9] <- "      â‰¤23"
 plot_df$Subgroup[10] <- "      >23"
 plot_df$Subgroup[12] <- "      =0"
-plot_df$Subgroup[13] <- "      ¡Ý1"
+plot_df$Subgroup[13] <- "      â‰¥1"
 plot_df$Subgroup[15] <- "      Wrist"
 plot_df$Subgroup[16] <- "      Proximal humerus"
 plot_df$Subgroup[17] <- "      Thoracic vertebra"
@@ -1887,18 +1888,18 @@ plot_df$"P value" <- as.character(plot_df$"P value")
 plot_df$Hypertensive <- as.character(plot_df$Hypertensive)
 plot_df$"Non-Hypertensive" <- as.character(plot_df$"Non-Hypertensive")
 plot_df[,c(3)][is.na(plot_df[,c(3)])] <- " "
-plot_df[,c(3)][which(plot_df[,c(3)]=="0"),] <- "¡Ü0.001"
+plot_df[,c(3)][which(plot_df[,c(3)]=="0"),] <- "â‰¤0.001"
 
 plot_df[,c(3,6,7,8)][is.na(plot_df[,c(3,6,7,8)])] <- " "
 plot_df$` ` <- paste(rep(" ", nrow(plot_df)), collapse = " ")
 plot_df$Subgroup[3] <- "      Female"
 plot_df$Subgroup[4] <- "      Male"
-plot_df$Subgroup[6] <- "      ¡Ü69"
+plot_df$Subgroup[6] <- "      â‰¤69"
 plot_df$Subgroup[7] <- "      >69"
-plot_df$Subgroup[9] <- "      ¡Ü23"
+plot_df$Subgroup[9] <- "      â‰¤23"
 plot_df$Subgroup[10] <- "      >23"
 plot_df$Subgroup[12] <- "      =0"
-plot_df$Subgroup[13] <- "      ¡Ý1"
+plot_df$Subgroup[13] <- "      â‰¥1"
 plot_df$Subgroup[15] <- "      Wrist"
 plot_df$Subgroup[16] <- "      Proximal humerus"
 plot_df$Subgroup[17] <- "      Thoracic vertebra"
@@ -1919,6 +1920,7 @@ Figure.S5 <- forest(
   xlim = c(0.1,4)
 )
 print(Figure.S5)
+
 
 
 
