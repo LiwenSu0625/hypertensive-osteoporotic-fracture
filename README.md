@@ -20,17 +20,25 @@ readxl, dplyr, reshape2, ggplot2, ggpubr, corrplot, survival, survminer, irr, vc
 
 ## View Outputs
 Table 1: Line 192
+
 Table 2: Line 752
+
 Table 3: Line 862
+
 Table S1: Line 1346
 
 Figure 2: Line 714
+
 Figure 3: Line 1103
 
 Figure S1: Line 780
+
 Figure S2: Line 816
+
 Figure S3: Line 1256
+
 Figure S4: Line 1647
+
 Figure S5: Line 1922
 
 ## Note on Reproducibility
@@ -38,4 +46,5 @@ To ensure successful execution, it is recommended to run the code sequentially f
 Several variables used in later analyses depend on objects created in earlier steps; therefore, skipping sections may lead to errors.
 
 ## Contact
+
 If you have questions regarding the code or analysis pipeline, please contact 879875806@qq.com.
