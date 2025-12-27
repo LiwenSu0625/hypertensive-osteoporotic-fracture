@@ -19,27 +19,27 @@ Operating System: Windows/Linux/macOS
 readxl, dplyr, reshape2, ggplot2, ggpubr, corrplot, survival, survminer, irr, vcd, pROC, gmodels, mice, MatchIt, rms, forestploter, grid.
 
 ## View Outputs
-Table 1: Line 192
+Table 1: Line 191
 
-Table 2: Line 752
+Table 2: Line 751
 
-Table 3: Line 862
+Table 3: Line 861
 
 Table S1: Line 1346
 
-Figure 2: Line 714
+Figure 2: Line 715
 
-Figure 3: Line 1103
+Figure 3: Line 1102
 
-Figure S1: Line 780
+Figure S1: Line 779
 
-Figure S2: Line 816
+Figure S2: Line 815
 
-Figure S3: Line 1256
+Figure S3: Line 1255
 
-Figure S4: Line 1647
+Figure S4: Line 1718
 
-Figure S5: Line 1922
+Figure S5: Line 1987
 
 ## Note on Reproducibility
 To ensure successful execution, it is recommended to run the code sequentially from top to bottom.  
@@ -48,3 +48,4 @@ Several variables used in later analyses depend on objects created in earlier st
 ## Contact
 
 If you have questions regarding the code or analysis pipeline, please contact 879875806@qq.com.
+
