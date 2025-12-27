@@ -7,7 +7,7 @@ All results reported in the manuscript are fully reproducible using the scripts 
 
 The study utilizes clinical data from tertiary hospitals to assess the impact of hypertension on mortality and refracture risk in osteoporotic fracture patients, including multivariable Cox proportional hazards regression, propensity score matching, and subgroup analyses.
 
-The results summarized in sub.xlsx and sub_refra.xlsx can also be fully reproduced using the R code provided in this repository. They are used to reproduce:
+The results summarized in sub_surv.xlsx and sub_refra.xlsx can also be fully reproduced using the R code provided in this repository. They are used to reproduce:
 Supplementary Figure S4 (mortality)
 Supplementary Figure S5 (refracture)
 
@@ -48,4 +48,5 @@ Several variables used in later analyses depend on objects created in earlier st
 ## Contact
 
 If you have questions regarding the code or analysis pipeline, please contact 879875806@qq.com.
+
 
